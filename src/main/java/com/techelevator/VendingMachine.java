@@ -33,11 +33,11 @@ public class VendingMachine {
             while (inventoryFile.hasNextLine()) {
                 String line = inventoryFile.nextLine();
                 String[] productInfo = line.split("\\|");
-//                Product lineProduct = new Product(productInfo[0], productInfo[1], productInfo[2], productInfo[3]);
-
-                if //LOOK HERE YOU WERE HERE WORKING********************************************
-
-                itemPrice = Double.parseDouble(productInfo[2]);
+                if (line.contains(itemCode)) {
+                    return itemPrice = Double.parseDouble(productInfo[2]);
+                } else {
+                    System.out.println("Item code invalid");
+                }
             }
         } catch (FileNotFoundException e) {
             System.out.println("There is no inventory");
@@ -46,17 +46,21 @@ public class VendingMachine {
     }
     
 
-    public String inventoryItemLine() {
+    public String inventoryItemLine(String itemCode) {
+        String itemLine = "";
         try (Scanner inventoryFile = new Scanner(inventory)) {
             while (inventoryFile.hasNextLine()) {
                 String line = inventoryFile.nextLine();
                 String[] productInfo = line.split("\\|");
                 Product lineProduct = new Product(productInfo[0], productInfo[1], productInfo[2], productInfo[3]);
+                if (line.contains(itemCode)) {
+                    return itemLine = productInfo[0] + " | " + productInfo[1];
+                }
             }
         } catch (FileNotFoundException e) {
             System.out.println("There is no inventory");
         }
-        return line;
+        return itemLine;
     }
 
 

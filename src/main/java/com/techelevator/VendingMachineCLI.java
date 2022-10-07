@@ -40,6 +40,7 @@ public class VendingMachineCLI {
 			String choice = (String) menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
 			VendingMachine machine = new VendingMachine();
 			Balance balance = new Balance();
+			double runningBalance;
 
 			if (choice.equals(MAIN_MENU_OPTION_DISPLAY_ITEMS)) {
 				// display vending machine items
@@ -54,22 +55,29 @@ public class VendingMachineCLI {
 				String purchaseChoice = (String)menu.getChoiceFromOptions(SUB_MENU_OPTIONS);
 				if(purchaseChoice.equals(SUB_MENU_FEED_MONEY)){
 					try {
-						System.out.println("How much money would you like to insert? (1, 5, 10, or 20)");
+						System.out.println("How much money would you like to insert?");
 						String inputMoney = inputScan.nextLine();
 						Double moneyAdded = Double.parseDouble(inputMoney);
 						balance.setBalance(moneyAdded);
 						System.out.println("Your current balance is $" + balance.getBalance());
+						runningBalance = balance.getBalance();
 						} catch (NumberFormatException e) {
 						System.out.println("Input must be 1, 5, 10, or 20");
 					}
 				} else if (purchaseChoice.equals(SUB_MENU_SELECT_PRODUCT)) {
-					try{
+					try{     //INPUT BALANCE DISAPPEARS AFTER SELECTING PRODUCT OPTION (balance resets to 0.0 after feeding)
+						machine.printInventory();
+						System.out.println();
+
+						// MAYBE WE CAN ADD RUNNING BALANCE HERE INSTEAD
+						System.out.println("Your current balance is $" + balance.getBalance());
+						System.out.println();
 						System.out.println("Please select item code >>> ");
 						String itemCodeInput = inputScan.nextLine();
-						if (machine.)
-
-//						double priceDeduction = machine.products.
 						balance.purchase(machine.readInventoryForPrice(itemCodeInput));
+						System.out.println(machine.inventoryItemLine(itemCodeInput));
+						System.out.println(balance.getBalance());
+//						System.out.println(machine);
 					} catch (Exception e) {
 						System.out.println("Invalid item code");
 					}
@@ -81,7 +89,5 @@ public class VendingMachineCLI {
 				vending = false;
 			}
 		}
-
 	}
-
 }

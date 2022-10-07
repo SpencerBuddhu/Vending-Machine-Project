@@ -2,7 +2,7 @@ package com.techelevator;
 
 public class Balance {
 
-    private double balance = 0;
+    private double balance;
 
 //***************************************
     public double getBalance() {
@@ -11,7 +11,7 @@ public class Balance {
 
     public void setBalance(double insertMoney) {
 
-        this.balance = balance + insertMoney;
+        balance = balance + insertMoney;
     }
 
     public void purchase(double itemPrice) {
