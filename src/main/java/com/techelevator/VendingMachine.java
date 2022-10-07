@@ -27,6 +27,9 @@ public class VendingMachine {
     }
 
 
+
+
+
     public double readInventoryForPrice(String itemCode) {
         double itemPrice = 0.0;
         try (Scanner inventoryFile = new Scanner(inventory)) {
