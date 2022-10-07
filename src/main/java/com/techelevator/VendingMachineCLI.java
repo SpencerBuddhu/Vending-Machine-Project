@@ -76,7 +76,7 @@ public class VendingMachineCLI {
 							balance.purchase(machine.readInventoryForPrice(itemCodeInput));
 							machine.adjustStock(itemCodeInput);
 							System.out.println(machine.inventoryItemLine(itemCodeInput));
-							System.out.println("Your new balance is: " + balance.getBalance());
+							System.out.println("Your new balance is: $" + balance.getBalance());
 							System.out.println();
 							System.out.println(machine.itemSound(itemCodeInput));
 						} else {
@@ -87,6 +87,7 @@ public class VendingMachineCLI {
 					}
 				}
 			} else if (choice.equals(MAIN_MENU_OPTION_EXIT)) {
+				System.out.println("Your change is: $"+ balance.getBalance());
 				vending = false;
 			}
 		}
