@@ -35,11 +35,13 @@ public class VendingMachineCLI {
 	public void run() {
 
 		boolean vending = true;
+		Balance balance = new Balance();
 
 		while (vending) {
+
 			String choice = (String) menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
 			VendingMachine machine = new VendingMachine();
-			Balance balance = new Balance();
+			///////Balance balance = new Balance();
 			double runningBalance;
 
 			if (choice.equals(MAIN_MENU_OPTION_DISPLAY_ITEMS)) {
