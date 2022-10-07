@@ -14,36 +14,22 @@ public class VendingMachine {
     public List<Product> products = new ArrayList<>();
 
     public void printInventory() {
-        try (Scanner inventoryFile = new Scanner(inventory)) {
-                while (inventoryFile.hasNextLine()) {
-                    String line = inventoryFile.nextLine();
-                    String[] productInfo = line.split("\\|");
-                    Product lineProduct = new Product(productInfo[0], productInfo[1], productInfo[2], productInfo[3]);
-                    System.out.println(lineProduct.getSlotNumber() + " | " + lineProduct.getName() + " | " + lineProduct.getPrice() + " | " + lineProduct.getNumberOFItems());
-                }
-        } catch (FileNotFoundException e) {
-            System.out.println("There is no inventory");
+        for (Product itemInfo : products) {
+            System.out.println(itemInfo.getSlotNumber() + " | " + itemInfo.getName() + " | " + itemInfo.getPrice() + " | " + itemInfo.getNumberOFItems());
         }
     }
-
-
-
-
+    
 
     public double readInventoryForPrice(String itemCode) {
         double itemPrice = 0.0;
-        try (Scanner inventoryFile = new Scanner(inventory)) {
-            while (inventoryFile.hasNextLine()) {
-                String line = inventoryFile.nextLine();
-                String[] productInfo = line.split("\\|");
-                if (line.contains(itemCode)) {
-                    return itemPrice = Double.parseDouble(productInfo[2]);
-                } else {
-                    System.out.println("Item code invalid");
+        try {
+            for (Product itemInfo : products) {
+                if (itemInfo.getSlotNumber().equals(itemCode)) {
+                    return Double.parseDouble(itemInfo.getPrice());
                 }
             }
-        } catch (FileNotFoundException e) {
-            System.out.println("There is no inventory");
+        } catch (Exception e) {
+            System.out.println("Item code invalid");
         }
         return itemPrice;
     }

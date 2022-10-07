@@ -41,6 +41,8 @@ public class VendingMachineCLI {
 
 			String choice = (String) menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
 			VendingMachine machine = new VendingMachine();
+			machine.addToInventoryList();
+
 			///////Balance balance = new Balance();
 			double runningBalance;
 
