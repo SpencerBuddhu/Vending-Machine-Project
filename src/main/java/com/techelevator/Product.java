@@ -10,6 +10,7 @@ public class Product {
     private String sound;
 
 
+
     public Product(String slotNumber, String name, String price, String type) {
         this.slotNumber = slotNumber;
         this.price = price;

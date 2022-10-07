@@ -2,7 +2,11 @@ package com.techelevator;
 
 import com.techelevator.view.Menu;
 
+import java.util.Scanner;
+
 public class VendingMachineCLI {
+
+	Scanner inputScan = new Scanner(System.in);
 
 	private static final String MAIN_MENU_OPTION_DISPLAY_ITEMS = "Display Vending Machine Items";
 	private static final String MAIN_MENU_OPTION_PURCHASE = "Purchase";
@@ -21,6 +25,7 @@ public class VendingMachineCLI {
 		VendingMachine machine = new VendingMachine();
 		VendingMachineCLI cli = new VendingMachineCLI(menu);
 		cli.run();
+		machine.addToInventoryList();
 	}
 
 	public VendingMachineCLI(Menu menu) {
@@ -38,19 +43,35 @@ public class VendingMachineCLI {
 
 			if (choice.equals(MAIN_MENU_OPTION_DISPLAY_ITEMS)) {
 				// display vending machine items
-				machine.readInventory();
+				machine.printInventory();
+
 			} else if (choice.equals(MAIN_MENU_OPTION_PURCHASE)) {
 				// do purchase
-				boolean buying = true;
-				machine.readInventory();
+
+
 				System.out.println();
-				System.out.println("Your current balance is " + balance.getBalance());
+				System.out.println("Your current balance is $" + balance.getBalance());
 				String purchaseChoice = (String)menu.getChoiceFromOptions(SUB_MENU_OPTIONS);
 				if(purchaseChoice.equals(SUB_MENU_FEED_MONEY)){
 					try {
-						System.out.println("How much money would you like to insert?");
-						} catch (Exception e) {
-						e.printStackTrace();
+						System.out.println("How much money would you like to insert? (1, 5, 10, or 20)");
+						String inputMoney = inputScan.nextLine();
+						Double moneyAdded = Double.parseDouble(inputMoney);
+						balance.setBalance(moneyAdded);
+						System.out.println("Your current balance is $" + balance.getBalance());
+						} catch (NumberFormatException e) {
+						System.out.println("Input must be 1, 5, 10, or 20");
+					}
+				} else if (purchaseChoice.equals(SUB_MENU_SELECT_PRODUCT)) {
+					try{
+						System.out.println("Please select item code >>> ");
+						String itemCodeInput = inputScan.nextLine();
+						if (machine.)
+
+//						double priceDeduction = machine.products.
+						balance.purchase(machine.readInventoryForPrice(itemCodeInput));
+					} catch (Exception e) {
+						System.out.println("Invalid item code");
 					}
 
 				}
