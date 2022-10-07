@@ -36,15 +36,12 @@ public class VendingMachineCLI {
 
 		boolean vending = true;
 		Balance balance = new Balance();
+		VendingMachine machine = new VendingMachine();
+		machine.addToInventoryList();
 
 		while (vending) {
 
 			String choice = (String) menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
-			VendingMachine machine = new VendingMachine();
-			machine.addToInventoryList();
-
-			///////Balance balance = new Balance();
-			double runningBalance;
 
 			if (choice.equals(MAIN_MENU_OPTION_DISPLAY_ITEMS)) {
 				// display vending machine items
@@ -52,7 +49,6 @@ public class VendingMachineCLI {
 
 			} else if (choice.equals(MAIN_MENU_OPTION_PURCHASE)) {
 				// do purchase
-
 
 				System.out.println();
 				System.out.println("Your current balance is $" + balance.getBalance());
@@ -64,32 +60,32 @@ public class VendingMachineCLI {
 						Double moneyAdded = Double.parseDouble(inputMoney);
 						balance.setBalance(moneyAdded);
 						System.out.println("Your current balance is $" + balance.getBalance());
-						runningBalance = balance.getBalance();
 						} catch (NumberFormatException e) {
-						System.out.println("Input must be 1, 5, 10, or 20");
+						System.out.println("Input must be an integer");
 					}
 				} else if (purchaseChoice.equals(SUB_MENU_SELECT_PRODUCT)) {
-					try{     //INPUT BALANCE DISAPPEARS AFTER SELECTING PRODUCT OPTION (balance resets to 0.0 after feeding)
+					try{
 						machine.printInventory();
 						System.out.println();
-
-						// MAYBE WE CAN ADD RUNNING BALANCE HERE INSTEAD
 						System.out.println("Your current balance is $" + balance.getBalance());
 						System.out.println();
 						System.out.println("Please select item code >>> ");
 						String itemCodeInput = inputScan.nextLine();
-						balance.purchase(machine.readInventoryForPrice(itemCodeInput));
-						System.out.println(machine.inventoryItemLine(itemCodeInput));
-						System.out.println("Your new balance is: " + balance.getBalance());
-						System.out.println();
-						System.out.println(machine.itemSound(itemCodeInput));
+						//Purchase methods after selection
+						if (machine.getCurrentProduct(itemCodeInput).getNumberOFItems() > 0) {
+							balance.purchase(machine.readInventoryForPrice(itemCodeInput));
+							machine.adjustStock(itemCodeInput);
+							System.out.println(machine.inventoryItemLine(itemCodeInput));
+							System.out.println("Your new balance is: " + balance.getBalance());
+							System.out.println();
+							System.out.println(machine.itemSound(itemCodeInput));
+						} else {
+							System.out.println("Item is out of Stock!");
+						}
 					} catch (Exception e) {
 						System.out.println("Invalid item code");
 					}
-
 				}
-
-
 			} else if (choice.equals(MAIN_MENU_OPTION_EXIT)) {
 				vending = false;
 			}

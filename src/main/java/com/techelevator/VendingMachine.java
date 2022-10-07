@@ -15,8 +15,23 @@ public class VendingMachine {
 
     public void printInventory() {
         for (Product itemInfo : products) {
-            System.out.println(itemInfo.getSlotNumber() + " | " + itemInfo.getName() + " | " + itemInfo.getPrice() + " | " + itemInfo.getNumberOFItems());
+            System.out.println(itemInfo.getSlotNumber() + " | " + itemInfo.getName() + " | " + itemInfo.getPrice() + " | " + itemInfo.getNumberOFItems() + " items in stock");
         }
+    }
+
+
+    public Product getCurrentProduct(String itemCode) {
+        Product currentProduct = null;
+        try {
+            for (Product itemInfo : products) {
+                if (itemInfo.getSlotNumber().equals(itemCode)) {
+                    currentProduct = itemInfo;
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Item code invalid");
+        }
+        return currentProduct;
     }
 
 
@@ -35,12 +50,25 @@ public class VendingMachine {
     }
 
 
+    public void adjustStock (String itemCode) {
+        try {
+            for (Product itemInfo : products) {
+                if (itemInfo.getSlotNumber().equals(itemCode)) {
+                    itemInfo.adjustStock();
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Item code invalid");
+        }
+    }
+
+
     public String inventoryItemLine(String itemCode) {
         String itemLine = "";
         try {
             for (Product itemInfo : products) {
                 if (itemInfo.getSlotNumber().equals(itemCode)) {
-                    itemLine = itemInfo.getSlotNumber() + " | " + itemInfo.getName();  //ADD REMAINING PRODUCT HERE
+                    itemLine = itemInfo.getSlotNumber() + " | " + itemInfo.getName() + " | " + itemInfo.getNumberOFItems() + " items remaining";
                 }
             }
         } catch (Exception e) {

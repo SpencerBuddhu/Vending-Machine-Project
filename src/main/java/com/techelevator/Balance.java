@@ -10,7 +10,6 @@ public class Balance {
     }
 
     public void setBalance(double insertMoney) {
-
         balance = balance + insertMoney;
     }
 

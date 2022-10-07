@@ -66,7 +66,7 @@ public class Product {
         return sound;
     }
 
-    public void purchase(){
+    public void adjustStock(){
         numberOFItems = numberOFItems - 1;
     }
 
