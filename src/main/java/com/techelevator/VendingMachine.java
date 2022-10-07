@@ -18,7 +18,7 @@ public class VendingMachine {
             System.out.println(itemInfo.getSlotNumber() + " | " + itemInfo.getName() + " | " + itemInfo.getPrice() + " | " + itemInfo.getNumberOFItems());
         }
     }
-    
+
 
     public double readInventoryForPrice(String itemCode) {
         double itemPrice = 0.0;
@@ -33,23 +33,35 @@ public class VendingMachine {
         }
         return itemPrice;
     }
-    
+
 
     public String inventoryItemLine(String itemCode) {
         String itemLine = "";
-        try (Scanner inventoryFile = new Scanner(inventory)) {
-            while (inventoryFile.hasNextLine()) {
-                String line = inventoryFile.nextLine();
-                String[] productInfo = line.split("\\|");
-                Product lineProduct = new Product(productInfo[0], productInfo[1], productInfo[2], productInfo[3]);
-                if (line.contains(itemCode)) {
-                    return itemLine = productInfo[0] + " | " + productInfo[1];
+        try {
+            for (Product itemInfo : products) {
+                if (itemInfo.getSlotNumber().equals(itemCode)) {
+                    itemLine = itemInfo.getSlotNumber() + " | " + itemInfo.getName();  //ADD REMAINING PRODUCT HERE
                 }
             }
-        } catch (FileNotFoundException e) {
-            System.out.println("There is no inventory");
+        } catch (Exception e) {
+            System.out.println("Item code invalid");
         }
         return itemLine;
+    }
+
+
+    public String itemSound(String itemCode) {
+        String sound = "";
+        try {
+            for (Product itemInfo : products) {
+                if (itemInfo.getSlotNumber().equals(itemCode)) {
+                    sound = itemInfo.getSound();
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Item code invalid");
+        }
+        return sound;
     }
 
 
@@ -65,9 +77,4 @@ public class VendingMachine {
             System.out.println("There is no inventory");
         }
     }
-
-
-
-
-
 }

@@ -80,8 +80,9 @@ public class VendingMachineCLI {
 						String itemCodeInput = inputScan.nextLine();
 						balance.purchase(machine.readInventoryForPrice(itemCodeInput));
 						System.out.println(machine.inventoryItemLine(itemCodeInput));
-						System.out.println(balance.getBalance());
-//						System.out.println(machine);
+						System.out.println("Your new balance is: " + balance.getBalance());
+						System.out.println();
+						System.out.println(machine.itemSound(itemCodeInput));
 					} catch (Exception e) {
 						System.out.println("Invalid item code");
 					}
