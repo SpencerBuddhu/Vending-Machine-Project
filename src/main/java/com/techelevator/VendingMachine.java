@@ -78,6 +78,21 @@ public class VendingMachine {
     }
 
 
+    public String logItemLine(String itemCode) {
+        String itemLine = "";
+        try {
+            for (Product itemInfo : products) {
+                if (itemInfo.getSlotNumber().equals(itemCode)) {
+                    itemLine = itemInfo.getSlotNumber() + " | " + itemInfo.getName();
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Item code invalid");
+        }
+        return itemLine;
+    }
+
+
     public String itemSound(String itemCode) {
         String sound = "";
         try {

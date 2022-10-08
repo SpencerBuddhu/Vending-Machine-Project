@@ -36,23 +36,6 @@ public class Product {
 
     //****************
 
-    //Setters
-    public void setSlotNumber(String slotNumber) {
-        this.slotNumber = slotNumber;
-    }
-
-    public void setPrice(String price) {
-        this.price = price;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
     public String getSound() {
         if (type.equals("Chip")) {
             sound = "Crunch Crunch, Yum!";
@@ -69,16 +52,5 @@ public class Product {
     public void adjustStock(){
         numberOFItems = numberOFItems - 1;
     }
-
-    public boolean canPurchase(){
-        if(this.numberOFItems >= 1) {
-            return true;
-        } else {
-            return false;
-        }
-
-    }
-
-
 }
 
