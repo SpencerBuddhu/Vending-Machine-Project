@@ -87,7 +87,8 @@ public class VendingMachineCLI {
 					}
 				}
 			} else if (choice.equals(MAIN_MENU_OPTION_EXIT)) {
-				System.out.println("Your change is: $"+ balance.getBalance());
+				System.out.println(balance.getChange());
+				System.out.println("Thank you for using the Tech Elevator Munchinator!");
 				vending = false;
 			}
 		}
