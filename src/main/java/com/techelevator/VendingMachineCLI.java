@@ -71,12 +71,17 @@ public class VendingMachineCLI {
 						System.out.println("How much money would you like to insert? (Whole Dollar Amount)");
 						String inputMoney = inputScan.nextLine();
 						Double moneyAdded = Double.parseDouble(inputMoney);
-						balance.setBalance(moneyAdded);
-						System.out.println("Your current balance is $" + balance.getBalance());
-						logList.add(dateFormat.format(timeNow) + " " + "FEED MONEY: " + "$"+String.format("%.2f", moneyAdded) + " $" + balance.getBalance());
-						logIndexCounter++;
+						//Check if input is an integer amount
+						if (moneyAdded % 1 == 0) {
+							balance.setBalance(moneyAdded);
+							System.out.println("Your current balance is $" + balance.getBalance());
+							logList.add(dateFormat.format(timeNow) + " " + "FEED MONEY: " + "$"+String.format("%.2f", moneyAdded) + " $" + balance.getBalance());
+							logIndexCounter++;
+						} else {
+							System.out.println("Invalid input! Please enter a Whole Dollar (integer) amount");
+						}
 						} catch (NumberFormatException e) {
-						System.out.println("Input must be an integer");
+						System.out.println("Invalid input! Please enter a Whole Dollar (integer) amount");
 					}
 				} else if (purchaseChoice.equals(SUB_MENU_SELECT_PRODUCT)) {
 					try{
@@ -102,6 +107,7 @@ public class VendingMachineCLI {
 							}
 						} else {
 							System.out.println("Insufficient Balance: Please insert additional money");
+							System.out.println("Your current balance is $" + balance.getBalance());
 						}
 					} catch (Exception e) {
 						System.out.println("Invalid item code");
@@ -117,6 +123,7 @@ public class VendingMachineCLI {
 				} catch (FileNotFoundException e) {
 					System.out.println("Log file path is invalid");
 				}
+				System.out.println("\nYour change is: $" + balance.getBalance());
 				System.out.println(balance.getChange());
 				System.out.println("Thank you for using the Tech Elevator Munchinator Machine!");
 				vending = false;

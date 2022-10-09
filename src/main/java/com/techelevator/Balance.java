@@ -49,7 +49,7 @@ public class Balance {
             balance = balance.subtract(penny);
             pennyCount++;
         }
-        changeInCoins = "Your change is: \nQuarters: " + quarterCount + "\nDimes: " + dimeCount + "\nNickels: " + nickelCount + "\nPennies: " + pennyCount;
+        changeInCoins = "Quarters: " + quarterCount + "\nDimes: " + dimeCount + "\nNickels: " + nickelCount + "\nPennies: " + pennyCount;
         return changeInCoins;
     }
 }

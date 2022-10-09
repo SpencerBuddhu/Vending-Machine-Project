@@ -15,7 +15,7 @@ public class VendingMachine {
 
     public void printInventory() {
         for (Product itemInfo : products) {
-            System.out.println(itemInfo.getSlotNumber() + " | " + itemInfo.getName() + " | " + itemInfo.getPrice() + " | " + itemInfo.getNumberOFItems() + " items in stock");
+            System.out.printf("%-2s | %-19s | %-5s | %-16s", itemInfo.getSlotNumber(), itemInfo.getName(), itemInfo.getPrice(), itemInfo.getNumberOFItems()  + " items in stock\n");
         }
     }
 
